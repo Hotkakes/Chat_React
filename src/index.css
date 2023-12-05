@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.listaChistes{
+    color: #6f6f6f;
+  }
+
+  .Buscador{
+    color: #818181;
+  }  
+
+  .Buscador input{
+    border-radius: 10px;
+    padding: 5px;
+    margin-left: 10px;
+  }  
