@@ -1,9 +1,20 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
+import ProductItem from "../components/ProductItem";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const { user, logout } = useLogin();
+  const cart = useSelector(state => state.cart) 
+    const [total, setTotal] = useState(0);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    setTotal(
+        cart.reduce((acc, product) => acc + product.price, 0).toFixed(2)
+    )
+}, [cart])
 
   const handleLogout = async () => {
     await logout();
@@ -26,7 +37,7 @@ const Navbar = () => {
     <nav className="bg-black p-4 w-full flex justify-center">
       <div className="container flex justify-between items-center text-white px-4">
         <h1 className="text-xl">WOLF Store</h1>
-        <Link to="/cart">Carrito</Link>
+        <Link to="/cart">Carrito ${total}</Link>
         <Link to="">
           <div className="Buscador">
             <span>Search</span>
