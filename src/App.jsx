@@ -3,12 +3,9 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
-import Cart from "./pages/Cart";
 import Login from "./pages/Login";
-import Detail from "./pages/Detail";
 import Auth from "./hoc/Auth";
 import Restricted from "./pages/auth/Restricted";
-import NewProduct from "./pages/auth/NewProduct";
 
 function App() {
   return (
@@ -20,9 +17,7 @@ function App() {
             <div className="container flex text-white p-4">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/cart" element={<Cart />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/detalle/:id" element={<Detail />} />
 
                 <Route
                   element={
@@ -32,7 +27,6 @@ function App() {
                   }
                 >
                   <Route path="/restricted" element={<Restricted />} />
-                  <Route path="/new-product" element={<NewProduct />} />
                 </Route>
               </Routes>
             </div>

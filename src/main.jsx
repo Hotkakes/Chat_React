@@ -5,7 +5,7 @@ import './index.css'
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+//import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -15,18 +15,18 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAKeGWF4oJm-6fFdQ9sJtSQdtm3TgodO9U",
-  authDomain: "fakestore-talentotech-48830.firebaseapp.com",
-  projectId: "fakestore-talentotech-48830",
-  storageBucket: "fakestore-talentotech-48830.appspot.com",
-  messagingSenderId: "356010188040",
-  appId: "1:356010188040:web:3ff775d36ea2708ff160bd",
-  measurementId: "G-HYP346KRRJ"
+  apiKey: "AIzaSyARm2q_h5gmTeyObh1SHFm8VSVT7QRNuDg",
+  authDomain: "chatreact-2023.firebaseapp.com",
+  projectId: "chatreact-2023",
+  storageBucket: "chatreact-2023.appspot.com",
+  messagingSenderId: "591125306657",
+  appId: "1:591125306657:web:ad7f356a15c6bcd6b9b260",
+  measurementId: "G-TW76MPYYC7"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+//const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 

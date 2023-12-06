@@ -1,44 +1,97 @@
-import { useEffect } from "react";
+import { Component, useState } from "react";
 import { useFakestoreApi } from "../hooks/useFakestoreApi";
-import ProductItem from "../components/ProductItem";
-import { Link } from "react-router-dom";
-
 const Home = () => {
-  const { data: products, loading, error, getProducts } = useFakestoreApi();
 
-  useEffect(() => {
-    const get = async () => {
-      const unsubscribe = await getProducts();
-      return () => {
-        if (typeof unsubscribe === "function") {
-          unsubscribe();
-        }
+  const [form, setForm] = useState({
+    mensaje: "",
+    messages: [
+      {mensaje:'Hola...'},
+    ]
+  });
+
+  const { storeNewProduct } = useFakestoreApi();
+  // const state = {
+  //   message: '',
+  //   messages: [
+  //     {id:0, text:'Hola'},
+  //     {id:1, text:'Hola2'},
+  //   ]
+  // }
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const list = form.messages;
+      const newMessage = {
+        mensaje: form.message
       };
-    };
-    get();
-  }, []);
+      list.push(newMessage);
+      //const setState({messages: list})
+      setForm({
+        ...form,
+        messages: list,
+      });
+  //   //const this.setState({messages: list})
+      const res = await storeNewProduct(form);
+      //navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // const handleSubmit=(e) => {
+  //   e.preventDefault();
+  //   const list = state.messages;
+  //   const newMessage = {
+  //     id: state.messages.lenght,
+  //     text: state.message
+  //   };
+  //   list.push(newMessage);
+  //   //const this.setState({messages: list})
+  //   const [form, setForm] = useState({
+  //     id: state.messages.lenght,
+  //     text: state.message
+  //   });
+  // }
+
+    
+
+  const UpdateMesagge = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+ 
+
+  const {messages} = form;
+  const messagesList = messages.map(message => {
+    return <> <li>
+     <span>{message.mensaje}</span>
+    </li>
+    </>
+  })
 
   return (
     <>
-      <div className="text-black">
-        <h1>Home</h1>
-        {loading ? <span>Cargando...</span> : null}
-        {error ? <span>Hubo un error</span> : null}
-        {products ? (
-          <ul className="grid grid-cols-5 gap-4 ">
-            {products.map((product) => (
-              <ProductItem product={product} key={product.id} />
-            ))}
-          </ul>
-        ) : null}
+    <div className="contenido">
+      <div className="contactos">
+        <h3>Mis Contactos</h3>
+        <ul>David</ul>
+        <ul>Talent Tech</ul>
       </div>
-      {/* Fixed floating button */}
-      <Link
-        to="/new-product"
-        className="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        +
-      </Link>
+      <div className="chat">
+        <ul>
+        {messagesList}
+        </ul>
+      
+      <form className="mensaje" onSubmit={handleSubmit}>
+        <input type="text" placeholder="ok" name="message" onChange={UpdateMesagge.bind(this)}></input>
+        <button>Enviar</button>
+      </form>
+      </div>
+    </div>
     </>
   );
 };

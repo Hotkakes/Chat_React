@@ -17,7 +17,7 @@ export const useFakestoreApi = () => {
   const getProducts = async () => {
     try {
       const res = await query(
-        collection(db, "products"),
+        collection(db, "mensajes"),
         orderBy("title", "asc")
       );
 
@@ -35,8 +35,10 @@ export const useFakestoreApi = () => {
 
   const storeNewProduct = async (product) => {
     try {
+      console.log(product);
       setLoading(true);
-      const res = await addDoc(collection(db, "products"), product);
+      const res = await addDoc(collection(db, "mensajes"), product);
+      console.log(res);
       return res;
     } catch (error) {
       throw new Error("Error al guardar producto");
